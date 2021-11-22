@@ -245,10 +245,17 @@ def detect(opt):
                         fps, w, h = 30, im0.shape[1], im0.shape[0]
                         save_path += '.mp4'
 
-                    # vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
+                    vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), fps, (w, h))
                     # vid_writer = cv2.VideoWriter(save_path, cv2.VideoWriter_fourcc(*'mp4v'), 15, (w/2, h/2))
-                    vid_writer = cv2.cudacodec.createVideoWriter(save_path, (w, h), fps)
-                vid_writer.write(im0)
+                    # vid_writer = cv2.cudacodec.createVideoWriter(save_path, (w, h), fps)
+                    pf = open('./pipein', 'wb')
+                # vid_writer.write(im0)
+
+                # with open('./pipein', 'wb') as pf:
+                #     pf.write(im0.tobytes())
+
+                pf.write(im0.tobytes())
+                # print(len(im0), len(im0[0]))
 
     # Print results
     t = tuple(x / seen * 1E3 for x in dt)  # speeds per image
